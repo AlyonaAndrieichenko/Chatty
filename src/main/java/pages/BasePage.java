@@ -10,4 +10,8 @@ public class BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
+//    public Header openHeader(){
+//        return new Header(driver);
+//    }
 }

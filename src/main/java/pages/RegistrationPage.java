@@ -36,6 +36,9 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//a[@href=\"/login\"]")
     private WebElement loginLink;
 
+    @FindBy(xpath = "//div[@class=\"text-error\"]")
+    private WebElement errorText;
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -45,9 +48,13 @@ public class RegistrationPage extends BasePage{
         return this;
     }
 
-    public RegistrationPage clickRegistration(){
+    public WebElement getErrorText(){
+        return this.errorText;
+    }
+
+    public HomePage clickRegistrationButton(){
         registrationButton.click();
-        return this;
+        return new HomePage(driver);
     }
 
     public RegistrationPage inputPassword(String password){

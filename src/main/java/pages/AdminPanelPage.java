@@ -2,8 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class ProfilePage extends BasePage{
-    public ProfilePage(WebDriver driver) {
+public class AdminPanelPage extends BasePage{
+    public AdminPanelPage(WebDriver driver) {
         super(driver);
     }
 

@@ -30,6 +30,9 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//div[@class=\"text-error\" and text()=\"Password must be 8-100 characters and include at least one letter and one digit\"]")
     private WebElement incorrectPasswordText;
 
+    @FindBy(xpath = "//div[@class=\"text-error\" and text()=\"User not found. Please register.\"]")
+    private WebElement userNotFoundText;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -44,9 +47,14 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    public HomePage clickLogin(){
+    public HomePage clickLoginForUser(){
         loginButton.click();
         return new HomePage(driver);
+    }
+
+    public AdminPanelPage clickLoginForAdmin(){
+        loginButton.click();
+        return new AdminPanelPage(driver);
     }
 
     public LoginPage inputPassword(String password){
@@ -62,5 +70,17 @@ public class LoginPage extends BasePage{
     public RegistrationPage clickSignIn(){
         signInLink.click();
         return new RegistrationPage(driver);
+    }
+
+    public WebElement getIncorrectEmailText(){
+        return this.incorrectEmailText;
+    }
+
+    public WebElement getIncorrectPasswordText(){
+        return this.incorrectPasswordText;
+    }
+
+    public WebElement getUserNotFoundText(){
+        return this.userNotFoundText;
     }
 }

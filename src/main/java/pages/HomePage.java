@@ -1,8 +1,8 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +14,7 @@ import static java.lang.Thread.sleep;
 
 public class HomePage extends BasePage{
 
-    @FindBy(xpath = "//label[@for=\"myPostsId\"]")
+    @FindBy(xpath = "//div[@class=\"post-header__left\"]")
     private WebElement myPostsToggle;
 
     @FindBy(xpath = "//span[@data-test=\"post-header__plus\"]")
@@ -33,7 +33,7 @@ public class HomePage extends BasePage{
     private WebElement uploadImageField;
 
     @FindBy(id = "publishDate")
-    private WebElement delayPostField;
+    private WebElement delayPostPicker;
 
     @FindBy(xpath = "//label[@for=\"draftCheckbox\"]")
     private WebElement draftToggle;
@@ -41,13 +41,27 @@ public class HomePage extends BasePage{
     @FindBy(tagName = "button")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//a[@class=\"menu-item \"]")
+    private WebElement myDraftsButton;
+
+    @FindBy(xpath = "//img[@class=\"post_uploaded_image__7qSWV\"]")
+    private WebElement imageUploaded;
+
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public HomePage clickOnMyPostsToggle(){
+    public OwnPostsFeedPage clickOnMyPostsToggle(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(myPostsToggle));
         myPostsToggle.click();
-        return this;
+        return new OwnPostsFeedPage(driver);
+    }
+
+    public MyDraftsPage clickOnMyDraftsButton(){
+        myDraftsButton.click();
+        return new MyDraftsPage(driver);
     }
 
     public HomePage clickOnCreatePostButton(){
@@ -72,11 +86,15 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public HomePage clickOnUploadImageField() throws IOException, InterruptedException {
+    public HomePage clickOnUploadImageField(){
         uploadImageField.click();
-       // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        sleep(3000);
-        Runtime.getRuntime().exec("C:\\Users\\Admin\\Desktop\\uploadImage.exe");
+        String scriptPath = "C:\\Users\\Admin\\Desktop\\uploadImageScript.ps1";
+        String command = "powershell.exe -ExecutionPolicy Bypass -File \"" + scriptPath + "\"";
+        try {
+            Runtime.getRuntime().exec(command);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 
@@ -85,8 +103,27 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    public HomePage clickOnDelayDatePicker(){
+        //  delayPostPicker.getDomProperty("value");
+        delayPostPicker.clear();
+        delayPostPicker.sendKeys("12092025");
+        return this;
+    }
+
     public HomePage clickOnSubmitButton(){
         submitButton.click();
         return this;
     }
+
+    public Header openHeader(){
+        return new Header(driver);
+    }
+
+    public HomePage imageIsUploaded(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(imageUploaded));
+        if (imageUploaded.isDisplayed()) return this;
+        else throw new RuntimeException("Image ISN'T uploaded");
+    }
+
 }
