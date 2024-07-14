@@ -1,19 +1,25 @@
 package pages;
 
 import baseTest.BaseTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CreatePostTest extends BaseTest {
 
-    @Test
-    public void createPostWithAllFieldsByUser() {
+    @BeforeEach
+    public void openCreatePost() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
                 .inputEmail("QWERTY@QERY.COM")
                 .inputPassword("qwerty123")
                 .clickLoginForUser()
-                .clickOnCreatePostButton()
-                .inputTitle("Title")
+                .clickOnCreatePostButton();
+    }
+
+    @Test
+    public void createPostWithAllFieldsByUser() {
+        HomePage homePage = new HomePage(driver);
+        homePage.inputTitle("Title")
                 .inputDescription("Description")
                 .inputContent("Content")
                 .clickOnUploadImageField()
@@ -23,29 +29,19 @@ public class CreatePostTest extends BaseTest {
 
     @Test
     public void createDelayedPostByUser() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
-                .inputEmail("QWERTY@QERY.COM")
-                .inputPassword("qwerty123")
-                .clickLoginForUser()
-                .clickOnCreatePostButton()
-                .inputTitle("Title")
+        HomePage homePage = new HomePage(driver);
+        homePage.inputTitle("Title")
                 .inputDescription("Description")
                 .inputContent("Content")
                 .clickOnUploadImageField()
-                .clickOnDelayDatePicker()
+                .chooseDelayDate("10", "08", "2024")
                 .clickOnSubmitButton();
     }
 
     @Test
     public void createDraftByUser() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
-                .inputEmail("QWERTY@QERY.COM")
-                .inputPassword("qwerty123")
-                .clickLoginForUser()
-                .clickOnCreatePostButton()
-                .inputTitle("Title")
+        HomePage homePage = new HomePage(driver);
+        homePage.inputTitle("Title")
                 .inputDescription("Description")
                 .inputContent("Content")
                 .clickOnUploadImageField()

@@ -11,7 +11,8 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-//    public Header openHeader(){
-//        return new Header(driver);
-//    }
+    public Header openHeader(){
+        return new Header(driver);
+    }
+
 }

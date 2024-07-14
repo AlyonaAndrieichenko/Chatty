@@ -29,8 +29,5 @@ public class MyDraftsPage extends BasePage{
         return contains;
     }
 
-    public Header openHeader(){
-        return new Header(driver);
-    }
 
 }

@@ -10,8 +10,4 @@ public class OwnPostsFeedPage extends BasePage{
         super(driver);
     }
 
-    public Header openHeader(){
-        return new Header(driver);
-    }
-
 }

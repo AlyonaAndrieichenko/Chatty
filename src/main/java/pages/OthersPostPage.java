@@ -7,8 +7,5 @@ public class OthersPostPage extends BasePage{
         super(driver);
     }
 
-    public Header openHeader(){
-        return new Header(driver);
-    }
 
 }

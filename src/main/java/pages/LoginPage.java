@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage{
 
@@ -82,5 +86,11 @@ public class LoginPage extends BasePage{
 
     public WebElement getUserNotFoundText(){
         return this.userNotFoundText;
+    }
+
+    public boolean displayedUserNotFoundText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(userNotFoundText));
+        return userNotFoundText.isDisplayed();
     }
 }

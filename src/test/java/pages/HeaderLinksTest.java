@@ -67,4 +67,20 @@ public class HeaderLinksTest extends BaseTest {
         wait.until(ExpectedConditions.urlToBe("http://chatty.telran-edu.de:8089/users"));
         defineTestResultEquals("http://chatty.telran-edu.de:8089/users", driver.getCurrentUrl());
     }
+
+    @Test
+    public void logoutFromHeaderTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open()
+                .inputEmail("QWERTY@QERY.COM")
+                .inputPassword("qwerty123")
+                .clickLoginForUser()
+                .openHeader()
+                .hoverDropDown()
+                .clickOnLogout();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe("http://chatty.telran-edu.de:8089/login"));
+        defineTestResultEquals("http://chatty.telran-edu.de:8089/login", driver.getCurrentUrl());
+    }
+
 }

@@ -103,20 +103,17 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public HomePage clickOnDelayDatePicker(){
+    public HomePage chooseDelayDate(String day, String month, String year){
         //  delayPostPicker.getDomProperty("value");
         delayPostPicker.clear();
-        delayPostPicker.sendKeys("12092025");
+        delayPostPicker.sendKeys(day, month,year);
         return this;
     }
 
     public HomePage clickOnSubmitButton(){
+
         submitButton.click();
         return this;
-    }
-
-    public Header openHeader(){
-        return new Header(driver);
     }
 
     public HomePage imageIsUploaded(){

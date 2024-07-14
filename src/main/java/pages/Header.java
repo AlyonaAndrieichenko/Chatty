@@ -17,7 +17,7 @@ public class Header extends BasePage{
     @FindBy(xpath = "//a[@href=\"/contact\"]")
     private WebElement contactUsLink;
 
-    @FindBy(xpath = "//div[@class=\"header__user header__menu\"]")
+    @FindBy(className = "header__user")
     private WebElement dropdownMenu;
 
     @FindBy(xpath = "//a[@href=\"/userprofile\"]")
@@ -37,7 +37,7 @@ public class Header extends BasePage{
     }
 
     public Header hoverDropDown(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(dropdownMenu));
         Actions action = new Actions(driver);
         action.moveToElement(dropdownMenu).perform();
@@ -66,7 +66,7 @@ public class Header extends BasePage{
     }
 
     public AdminPanelPage clickOnAdminPanel(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(adminPanelButton));
         adminPanelButton.click();
         return new AdminPanelPage(driver);
