@@ -8,16 +8,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class RegistrationTest extends BaseTest {
-    String registrationUserEmail = "registration@email.com";
-    String password = "example123";
-    String registrationAdminEmail = "registrationAdmin@email.com";
+    private final String registrationUserEmail = "registration@email.com";
+    private final String password = "example123";
+    private final String registrationAdminEmail = "registrationAdmin@email.com";
     private final String homeBlogLink = "http://chatty.telran-edu.de:8089/homeblog";
 
 
     @Test
     public void registerUserTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .clickSignIn()
                 .inputEmail(registrationUserEmail)
                 .inputPassword(password)
@@ -32,8 +32,8 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registerAdminTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .clickSignIn()
                 .inputEmail(registrationAdminEmail)
                 .inputPassword(password)
@@ -48,8 +48,8 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registerAdminWithExistingDataTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .clickSignIn()
                 .inputEmail(registrationUserEmail)
                 .inputPassword(password)

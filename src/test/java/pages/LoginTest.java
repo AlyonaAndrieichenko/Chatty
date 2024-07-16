@@ -18,8 +18,8 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginTestPositive() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .inputEmail(userEmail)
                 .inputPassword(password)
                 .clickLoginForUser();
@@ -45,8 +45,8 @@ public class LoginTest extends BaseTest {
                 .inputEmail(notRegisteredEmail)
                 .inputPassword(password)
                 .clickLoginForUser();
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-         wait.until(ExpectedConditions.visibilityOf(loginPage.getUserNotFoundText()));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(loginPage.getUserNotFoundText()));
         defineTestResultEquals("User not found. Please register.", loginPage.getUserNotFoundText().getText());
     }
 
@@ -58,6 +58,6 @@ public class LoginTest extends BaseTest {
                 .inputPassword(wrongPassword)
                 .clickLoginForUser();
         defineTestResultEquals("Password must be 8-100 characters and include at least one letter and one digit",
-                                loginPage.getIncorrectPasswordText().getText());
+                loginPage.getIncorrectPasswordText().getText());
     }
 }

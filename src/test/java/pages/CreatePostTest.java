@@ -4,18 +4,21 @@ import baseTest.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class CreatePostTest extends BaseTest {
-    private String title = "qwerty";
-    private String description = "qwertyuio";
-    private String content = "asdfgh";
-    private String email = "QWERTY@QERY.COM";
-    private String password = "qwerty123";
+    private final String title = "qwerty";
+    private final String description = "qwertyuio";
+    private final String content = "asdfgh";
+    private final String email = "QWERTY@QERY.COM";
+    private final String password = "qwerty123";
+    private final LocalDate delayDate = LocalDate.of(2024, 10, 8);
 
 
     @BeforeEach
     public void openCreatePost() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .inputEmail(email)
                 .inputPassword(password)
                 .clickLoginForUser()
@@ -40,7 +43,7 @@ public class CreatePostTest extends BaseTest {
                 .inputDescription(description)
                 .inputContent(content)
                 .clickOnUploadImageField()
-                .chooseDelayDate("10", "08", "2024")
+                .chooseDelayDate(delayDate)
                 .clickOnSubmitButton();
     }
 

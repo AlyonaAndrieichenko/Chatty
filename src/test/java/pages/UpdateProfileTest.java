@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class UpdateProfileTest extends BaseTest {
     private final String updatedName = "UpdatedName";
     private final String updatedSurname = "UpdatedSurname";
     private final String gender = "FEMALE";
-    private final String updatedBirthday = "1987-05-12"; //split(-)
+    private final LocalDate updatedBirthday = LocalDate.of(1987, 12, 3);
     private final String updatedPhone = "+49151147445";
     private final String oldPassword = "qwerty123";
     private final String newPassword = "qwerty12345";
@@ -25,8 +26,8 @@ public class UpdateProfileTest extends BaseTest {
 
     @BeforeEach
     public void login() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .inputEmail(userEmail)
                 .inputPassword(oldPassword)
                 .clickLoginForUser()
@@ -37,28 +38,23 @@ public class UpdateProfileTest extends BaseTest {
 
     @Test
     public void updateAllProfileInputsTest() {
-        ProfilePage profilePage = new ProfilePage(driver);
-        List<String> updatedData = new ArrayList<>();
-        updatedData.add(updatedName);
-        updatedData.add(updatedSurname);
-        updatedData.add(updatedBirthday);
-        updatedData.add(updatedPhone);
-        updatedData.add(gender);
-        profilePage.clickOnEditButton()
+        ProfilePage profilePage = new ProfilePage(driver)
+                .clickOnEditButton()
                 .inputName(updatedName)
                 .inputSurname(updatedSurname)
-                .inputBirthday("12", "05", "1987")
+                .inputBirthday(updatedBirthday)
                 .inputPhone(updatedPhone)
                 .clickOnGenderDropDown()
                 .chooseFemaleGender()
                 .clickOnSaveButton();
+        List<String> updatedData = List.of(updatedName, updatedSurname, updatedBirthday.toString(), updatedPhone, gender);
         defineTestResultTrue(profilePage.containUserData(updatedData));
     }
 
     @Test
     public void updatePasswordTest() {
-        ProfilePage profilePage = new ProfilePage(driver);
-        profilePage.clickOnEditButton()
+        new ProfilePage(driver)
+                .clickOnEditButton()
                 .clickOnChangePasswordButton()
                 .inputOldPassword(oldPassword)
                 .inputNewPassword(newPassword)
@@ -74,8 +70,8 @@ public class UpdateProfileTest extends BaseTest {
         wait.until(ExpectedConditions.urlToBe(homeBlogLink));
         defineTestResultEquals(homeBlogLink, driver.getCurrentUrl());
 
-        HomePage homePage = new HomePage(driver);
-        homePage.openHeader()
+        new HomePage(driver)
+                .openHeader()
                 .hoverDropDown()
                 .clickOnYourProfile()
                 .clickOnChangePasswordButton()

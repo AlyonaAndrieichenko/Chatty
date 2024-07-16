@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDate;
 
 import static java.lang.Thread.sleep;
 
@@ -103,8 +104,13 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public HomePage chooseDelayDate(String day, String month, String year){
+    public HomePage chooseDelayDate(LocalDate delayDate){
+        String delayDateString = delayDate.toString();
         delayPostPicker.clear();
+        String[] fullDate = delayDateString.split("-");
+        String day = fullDate[2];
+        String month = fullDate[1];
+        String year = fullDate[0];
         delayPostPicker.sendKeys(day, month,year);
         return this;
     }

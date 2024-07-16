@@ -15,8 +15,8 @@ public class ContactTest extends BaseTest {
 
     @BeforeEach
     public void login() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .inputEmail(userEmail)
                 .inputPassword(userPassword)
                 .clickLoginForUser();

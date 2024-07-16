@@ -11,8 +11,8 @@ public class OwnPostsFeedTest extends BaseTest {
 
     @BeforeEach
     public void login() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.open()
+        new LoginPage(driver)
+                .open()
                 .inputEmail(userEmail)
                 .inputPassword(password)
                 .clickLoginForUser();
@@ -20,8 +20,8 @@ public class OwnPostsFeedTest extends BaseTest {
 
     @Test
     public void ownPostsFeedContainsOnlyUserPosts() {
-        HomePage homePage = new HomePage(driver);
-        boolean actual = homePage.clickOnMyPostsToggle()
+        boolean actual = new HomePage(driver)
+                .clickOnMyPostsToggle()
                 .containsOnlyUserName(updatedName);
         defineTestResultTrue(actual);
     }
