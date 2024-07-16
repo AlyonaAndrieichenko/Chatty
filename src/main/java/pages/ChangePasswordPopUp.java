@@ -42,5 +42,4 @@ public class ChangePasswordPopUp extends BasePage{
         return new ProfilePage(driver);
     }
 
-
 }

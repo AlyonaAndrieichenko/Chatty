@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ProfilePage extends BasePage{
 
+    private final WebDriverWait wait;
+
     @FindBy(xpath = "//p[@data-test=\"profileEmail\"]")
     private WebElement profileEmail;
 
@@ -54,6 +56,7 @@ public class ProfilePage extends BasePage{
 
     public ProfilePage(WebDriver driver) {
         super(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     public boolean isProfilePage(){
@@ -61,48 +64,41 @@ public class ProfilePage extends BasePage{
     }
 
     public String getTextFromHeader(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(profileEmail));
         return profileEmail.getText();
     }
 
     public ProfilePage clickOnEditButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(editButton));
         editButton.click();
         return this;
     }
 
     public ProfilePage clickOnSaveButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(saveButton));
         saveButton.click();
         return this;
     }
 
     public ChangePasswordPopUp clickOnChangePasswordButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(changePasswordButton));
         changePasswordButton.click();
         return new ChangePasswordPopUp(driver);
     }
 
     public ProfilePage clickOnGenderDropDown(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(genderDropDown));
         genderDropDown.click();
         return this;
     }
 
     public ProfilePage chooseMaleGender(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(genderMaleOption));
         genderMaleOption.click();
         return this;
     }
 
     public ProfilePage chooseFemaleGender(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(genderFemaleOption));
         genderFemaleOption.click();
         return this;
@@ -131,14 +127,6 @@ public class ProfilePage extends BasePage{
         phoneInput.sendKeys(phone);
         return this;
     }
-
-//    public boolean containUserData(List<String> updatedData){
-//        List<String> actualData = new ArrayList<>();
-//        for (WebElement data : userData){
-//            actualData.add(data.getText());
-//        }
-//        return actualData.equals(updatedData);
-//    }
 
     public boolean containUserData(List<String> updatedData) {
         System.out.println(updatedData);

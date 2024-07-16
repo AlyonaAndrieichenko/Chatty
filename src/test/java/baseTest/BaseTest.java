@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import pages.LoginPage;
 import util.ChromeRegistry;
 import util.ScreenshotUtil;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +30,7 @@ public class BaseTest {
             assertEquals(expected, actual);
         } catch (AssertionError e) {
             ScreenshotUtil.captureScreen(driver, name);
-            Assert.fail("TEST FAILED");
+            fail("TEST FAILED");
         }
     }
 
@@ -41,7 +40,7 @@ public class BaseTest {
             assertTrue(condition);
         } catch (AssertionError e) {
             ScreenshotUtil.captureScreen(driver, name);
-            Assert.fail("TEST FAILED");
+            fail("TEST FAILED");
         }
     }
 
@@ -51,7 +50,7 @@ public class BaseTest {
             assertFalse(condition);
         } catch (AssertionError e) {
             ScreenshotUtil.captureScreen(driver, name);
-            Assert.fail("TEST FAILED");
+            fail("TEST FAILED");
         }
     }
 }

@@ -11,18 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateProfileTest extends BaseTest {
-    String updatedName = "UpdatedName";
-    String updatedSurname = "UpdatedSurname";
-    String updatedBirthday = "1987-05-12";
-    String updatedPhone = "+49151147445";
-    String oldPassword = "qwerty123";
-    String newPassword = "qwerty12345";
+
+    private final String userEmail = "QWERTY@QERY.COM";
+    private final String updatedName = "UpdatedName";
+    private final String updatedSurname = "UpdatedSurname";
+    private final String gender = "FEMALE";
+    private final String updatedBirthday = "1987-05-12"; //split(-)
+    private final String updatedPhone = "+49151147445";
+    private final String oldPassword = "qwerty123";
+    private final String newPassword = "qwerty12345";
+    private final String homeBlogLink = "http://chatty.telran-edu.de:8089/homeblog";
+
 
     @BeforeEach
     public void login() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
-                .inputEmail("QWERTY@QERY.COM")
+                .inputEmail(userEmail)
                 .inputPassword(oldPassword)
                 .clickLoginForUser()
                 .openHeader()
@@ -38,7 +43,7 @@ public class UpdateProfileTest extends BaseTest {
         updatedData.add(updatedSurname);
         updatedData.add(updatedBirthday);
         updatedData.add(updatedPhone);
-        updatedData.add("FEMALE");
+        updatedData.add(gender);
         profilePage.clickOnEditButton()
                 .inputName(updatedName)
                 .inputSurname(updatedSurname)
@@ -62,12 +67,12 @@ public class UpdateProfileTest extends BaseTest {
                 .openHeader()
                 .hoverDropDown()
                 .clickOnLogout()
-                .inputEmail("QWERTY@QERY.COM")
+                .inputEmail(userEmail)
                 .inputPassword(newPassword)
                 .clickLoginForUser();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("http://chatty.telran-edu.de:8089/homeblog"));
-        defineTestResultEquals("http://chatty.telran-edu.de:8089/homeblog", driver.getCurrentUrl());
+        wait.until(ExpectedConditions.urlToBe(homeBlogLink));
+        defineTestResultEquals(homeBlogLink, driver.getCurrentUrl());
 
         HomePage homePage = new HomePage(driver);
         homePage.openHeader()

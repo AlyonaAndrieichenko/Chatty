@@ -9,24 +9,31 @@ import java.time.Duration;
 
 public class LoginTest extends BaseTest {
 
+    private final String userEmail = "QWERTY@QERY.COM";
+    private final String emailWithoutAT = "QWERTYQERY.COMM";
+    private final String notRegisteredEmail = "QWERTY@QERY.COMM";
+    private final String password = "qwerty123";
+    private final String wrongPassword = "12345678";
+    private final String homeBlogLink = "http://chatty.telran-edu.de:8089/homeblog";
+
     @Test
     public void loginTestPositive() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
-                .inputEmail("QWERTY@QERY.COM")
-                .inputPassword("qwerty123")
+                .inputEmail(userEmail)
+                .inputPassword(password)
                 .clickLoginForUser();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("http://chatty.telran-edu.de:8089/homeblog"));
-        defineTestResultEquals("http://chatty.telran-edu.de:8089/homeblog", driver.getCurrentUrl());
+        wait.until(ExpectedConditions.urlToBe(homeBlogLink));
+        defineTestResultEquals(homeBlogLink, driver.getCurrentUrl());
     }
 
     @Test
     public void loginWithoutAtInEmailTest() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
-                .inputEmail("QWERTYQERY.COMM")
-                .inputPassword("qwerty123")
+                .inputEmail(emailWithoutAT)
+                .inputPassword(password)
                 .clickLoginForUser();
         defineTestResultEquals("Incorrect email", loginPage.getIncorrectEmailText().getText());
     }
@@ -35,8 +42,8 @@ public class LoginTest extends BaseTest {
     public void loginWithNotRegisteredEmailTest() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
-                .inputEmail("QWERTY@QERY.COMM")
-                .inputPassword("qwerty123")
+                .inputEmail(notRegisteredEmail)
+                .inputPassword(password)
                 .clickLoginForUser();
          WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
          wait.until(ExpectedConditions.visibilityOf(loginPage.getUserNotFoundText()));
@@ -47,8 +54,8 @@ public class LoginTest extends BaseTest {
     public void loginOnlyWithOnlyNumbersPasswordTest() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open()
-                .inputEmail("QWERTY@QERY.COM")
-                .inputPassword("12345678")
+                .inputEmail(userEmail)
+                .inputPassword(wrongPassword)
                 .clickLoginForUser();
         defineTestResultEquals("Password must be 8-100 characters and include at least one letter and one digit",
                                 loginPage.getIncorrectPasswordText().getText());

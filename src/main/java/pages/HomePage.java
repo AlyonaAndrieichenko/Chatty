@@ -13,6 +13,7 @@ import java.time.Duration;
 import static java.lang.Thread.sleep;
 
 public class HomePage extends BasePage{
+    private final WebDriverWait wait;
 
     @FindBy(xpath = "//div[@class=\"post-header__left\"]")
     private WebElement myPostsToggle;
@@ -50,10 +51,10 @@ public class HomePage extends BasePage{
 
     public HomePage(WebDriver driver) {
         super(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public OwnPostsFeedPage clickOnMyPostsToggle(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(myPostsToggle));
         myPostsToggle.click();
         return new OwnPostsFeedPage(driver);
@@ -65,7 +66,6 @@ public class HomePage extends BasePage{
     }
 
     public HomePage clickOnCreatePostButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(createPostButton));
         createPostButton.click();
         return this;
@@ -104,20 +104,17 @@ public class HomePage extends BasePage{
     }
 
     public HomePage chooseDelayDate(String day, String month, String year){
-        //  delayPostPicker.getDomProperty("value");
         delayPostPicker.clear();
         delayPostPicker.sendKeys(day, month,year);
         return this;
     }
 
     public HomePage clickOnSubmitButton(){
-
         submitButton.click();
         return this;
     }
 
     public HomePage imageIsUploaded(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(imageUploaded));
         if (imageUploaded.isDisplayed()) return this;
         else throw new RuntimeException("Image ISN'T uploaded");

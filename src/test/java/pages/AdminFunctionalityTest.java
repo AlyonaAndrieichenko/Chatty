@@ -2,10 +2,6 @@ package pages;
 
 import baseTest.BaseTest;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class AdminFunctionalityTest extends BaseTest {
 
@@ -16,8 +12,8 @@ public class AdminFunctionalityTest extends BaseTest {
 
     @Test
     public void searchUserTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        String actualSearchResult = loginPage.open()
+        String actualSearchResult = new LoginPage(driver)
+                .open()
                 .clickSignIn()
                 .inputEmail(userEmail)
                 .inputPassword(userPass)
@@ -31,7 +27,7 @@ public class AdminFunctionalityTest extends BaseTest {
                 .inputEmail(adminEmail)
                 .inputPassword(adminPass)
                 .clickLoginForAdmin()
-                .inputEmailInSearchInput(userEmail)
+                .inputEmailInSearchEditbox(userEmail)
                 .clickOnSearchButton()
                 .getUserEmail();
         defineTestResultEquals(userEmail, actualSearchResult);
@@ -39,12 +35,12 @@ public class AdminFunctionalityTest extends BaseTest {
 
     @Test
     public void updateUserTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        boolean isProfilePage = loginPage.open()
+        boolean isProfilePage = new LoginPage(driver)
+                .open()
                 .inputEmail(adminEmail)
                 .inputPassword(adminPass)
                 .clickLoginForAdmin()
-                .inputEmailInSearchInput(userEmail)
+                .inputEmailInSearchEditbox(userEmail)
                 .clickOnSearchButton()
                 .clickOnUpdateUserButton()
                 .isProfilePage();
@@ -59,7 +55,7 @@ public class AdminFunctionalityTest extends BaseTest {
                 .inputEmail(adminEmail)
                 .inputPassword(adminPass)
                 .clickLoginForAdmin()
-                .inputEmailInSearchInput(userEmail)
+                .inputEmailInSearchEditbox(userEmail)
                 .clickOnSearchButton()
                 .clickOnDeleteUserButton()
                 .openHeader()

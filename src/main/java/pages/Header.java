@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class Header extends BasePage{
+    private final WebDriverWait wait;
 
     @FindBy(xpath = "//a[@href=\"/about\"]")
     private WebElement aboutLink;
@@ -34,10 +35,10 @@ public class Header extends BasePage{
 
     public Header(WebDriver driver) {
         super(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public Header hoverDropDown(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(dropdownMenu));
         Actions action = new Actions(driver);
         action.moveToElement(dropdownMenu).perform();
@@ -45,42 +46,36 @@ public class Header extends BasePage{
     }
 
     public ProfilePage clickOnYourProfile(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(yourProfileButton));
         yourProfileButton.click();
         return new ProfilePage(driver);
     }
 
     public MyDraftsPage clickOnYourDraftsLink(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(yourDraftsButton));
         yourDraftsButton.click();
         return new MyDraftsPage(driver);
     }
 
     public LoginPage clickOnLogout(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(logoutButton));
         logoutButton.click();
         return new LoginPage(driver);
     }
 
     public AdminPanelPage clickOnAdminPanel(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(adminPanelButton));
         adminPanelButton.click();
         return new AdminPanelPage(driver);
     }
 
     public AboutPage clickOnAboutLink(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(aboutLink));
         aboutLink.click();
         return new AboutPage(driver);
     }
 
     public ContactPage clickOnContactLink(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(contactUsLink));
         contactUsLink.click();
         return new ContactPage(driver);
