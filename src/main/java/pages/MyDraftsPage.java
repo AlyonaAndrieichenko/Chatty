@@ -25,6 +25,7 @@ public class MyDraftsPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOfAllElements(postsDescriptions));
         for (WebElement postDescription : postsDescriptions) {
              if (postDescription.getText().contains(description)) contains = true;
+             else return false;
         }
         return contains;
     }

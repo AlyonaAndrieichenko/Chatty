@@ -40,6 +40,7 @@ public class BaseTest {
         try {
             assertTrue(condition);
         } catch (AssertionError e) {
+            ScreenshotUtil.captureScreen(driver, name);
             Assert.fail("TEST FAILED");
         }
     }
@@ -49,6 +50,7 @@ public class BaseTest {
         try {
             assertFalse(condition);
         } catch (AssertionError e) {
+            ScreenshotUtil.captureScreen(driver, name);
             Assert.fail("TEST FAILED");
         }
     }
