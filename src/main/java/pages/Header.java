@@ -40,8 +40,7 @@ public class Header extends BasePage{
 
     public Header hoverDropDown(){
         wait.until(ExpectedConditions.visibilityOf(dropdownMenu));
-        Actions action = new Actions(driver);
-        action.moveToElement(dropdownMenu).perform();
+        new Actions(driver).moveToElement(dropdownMenu).perform();
         return this;
     }
 

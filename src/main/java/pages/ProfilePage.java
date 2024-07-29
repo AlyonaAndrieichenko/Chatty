@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfilePage extends BasePage {
@@ -81,10 +80,10 @@ public class ProfilePage extends BasePage {
         return this;
     }
 
-    public ChangePasswordPopUp clickOnChangePasswordButton() {
+    public ChangePasswordPopUpPage clickOnChangePasswordButton() {
         wait.until(ExpectedConditions.visibilityOf(changePasswordButton));
         changePasswordButton.click();
-        return new ChangePasswordPopUp(driver);
+        return new ChangePasswordPopUpPage(driver);
     }
 
     public ProfilePage clickOnGenderDropDown() {

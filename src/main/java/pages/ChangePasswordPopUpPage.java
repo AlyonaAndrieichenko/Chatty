@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ChangePasswordPopUp extends BasePage{
+public class ChangePasswordPopUpPage extends BasePage{
 
     @FindBy(xpath = "//input[@placeholder=\"Old password\"]")
     private WebElement oldPasswordInput;
@@ -18,21 +18,21 @@ public class ChangePasswordPopUp extends BasePage{
     @FindBy(xpath = "//button[@class=\"PasswordModal_pass_btn__eGL9h\"]")
     private WebElement saveButton;
 
-    public ChangePasswordPopUp(WebDriver driver) {
+    public ChangePasswordPopUpPage(WebDriver driver) {
         super(driver);
     }
 
-    public ChangePasswordPopUp inputOldPassword(String oldPassword){
+    public ChangePasswordPopUpPage inputOldPassword(String oldPassword){
         oldPasswordInput.sendKeys(oldPassword);
         return this;
     }
 
-    public ChangePasswordPopUp inputNewPassword(String newPassword){
+    public ChangePasswordPopUpPage inputNewPassword(String newPassword){
         newPasswordInput.sendKeys(newPassword);
         return this;
     }
 
-    public ChangePasswordPopUp inputConfirmNewPassword(String confirmNewPassword){
+    public ChangePasswordPopUpPage inputConfirmNewPassword(String confirmNewPassword){
         confirmNewPasswordInput.sendKeys(confirmNewPassword);
         return this;
     }
